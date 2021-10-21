@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+
+		<title>J1 Practice</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			.formfield{margin-bottom:10px;}
+		</style>
+	</head>
+	<body>
+	<p>Tournament Selection <a href="https://cemc.uwaterloo.ca/contests/computing/2016/stage%201/juniorEn.pdf">from the J1 problem hosted by the CCC 2016.</a></p>
+	<div id="app">
+		<div class="formfield">
+			<label>Game 1: <label> <input v-model="game_1_result" :placeholder="placeholder">
+		</div>
+		<div class="formfield">
+			<label>Game 2: <label> <input v-model="game_2_result" :placeholder="placeholder">
+		</div>
+		<div class="formfield">
+			<label>Game 3: <label> <input v-model="game_3_result" :placeholder="placeholder">
+		</div>
+		<div class="formfield">
+			<label>Game 4: <label> <input v-model="game_4_result" :placeholder="placeholder">
+		</div>
+		<div class="formfield">
+			<label>Game 5: <label> <input v-model="game_5_result" :placeholder="placeholder" >
+		</div>
+		<div class="formfield">
+			<label>Game 6: <label> <input v-model="game_6_result" :placeholder="placeholder">
+		</div>
+		<div id="result">
+			<!-- <div><label>show diagnostics:</label><input type="checkbox" v-model="game_diagnostics"></div> -->
+			<div v-if="game_diagnostics">{{statement}} {{total_game_wins}}</div>
+			<div v-else>You lost all games, Sorry your eliminated</div>
+		</div>
+	</div>
+
+	<script>
+	var app = new Vue({
+		el: '#app',
+		data:{
+			game_diagnostics:true,
+			statement:"Your",
+			game_1_result:"",
+			game_2_result:"",
+			game_3_result:"",
+			game_4_result:"",
+			game_5_result:"",
+			game_6_result:"",
+			placeholder: 'W or L'
+		},
+		computed:{
+			total_game_wins:function(){
+
+				let W = 0;
+				let L = 0;
+
+				if(this.game_1_result === "W"){
+					W = W +1;
+				}else{
+					L= L +1;
+				}
+
+
+				if(this.game_2_result === "W"){
+					W = W +1;
+				}else{
+					L = L +1;
+				}
+				if(this.game_3_result === "W"){
+					W = W +1;
+				}else{
+					L= L +1;
+				}
+				if(this.game_4_result === "W"){
+					W = W +1;
+				}else{
+					L= L +1;
+				}
+				if(this.game_5_result === "W"){
+					W = W +1;
+				}else{
+					L= L +1;
+				}
+				if(this.game_6_result === "W"){
+					W = W +1;
+				}else{
+					L= L +1;
+				}
+					console.log(W);
+
+				if(W === 5 || W === 6){
+					return "Group 1";
+				}else if (W === 3 || W === 4) {
+					return "Group 2";
+				}else if (W ===1 || W === 2){
+					return "Group 3";
+				}else {
+					return "lost all games, Sorry your eliminated";
+				};
+       return W;
+
+
+
+			},
+
+		}
+	});
+
+	</script>
+	<!--
+		v-model will allow you to quickly bind form elements to the data property.
+		Make sure to set a default value!
+		The Computed property can be used like data, except for values that are calculated from data properties.
+		In this example 'treat_total' is computed from data properties, and 'is_happy' is computed from 'treat_total'.
+
+		ASYNCHRONOUS LEARNING EXERCISE : J1
+		- Find any J1 problem
+		- Imagine an interface that allows the user to enter data on the webpage
+		- Build using v-model and computed properties!
+
+	-->
+	</body>
+</html>
